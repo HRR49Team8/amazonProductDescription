@@ -1,12 +1,18 @@
 # Project Name
 
-> This project is a clone of an Amazon product page's Product Information module. It is one module of four built as a service to render through a proxy server to produce an Amazon Product page.
+> Product Information module for a Product page.
 
 ## Related Projects
 
+Original Front-End:
   - https://github.com/House-Bezos/joe-service
   - https://github.com/House-Bezos/zains-service
   - https://github.com/House-Bezos/Dylans-service
+
+Further Back-End Development:
+  - https://github.com/HRR49Team8/amazonRelatedProducts
+  - https://github.com/HRR49Team8/amazonCarousel
+  - https://github.com/HRR49Team8/amazonReviews
 
 ## Table of Contents
 
@@ -16,13 +22,11 @@
 
 ## Usage
 
-Once MongoDB is started, run
+Once MongoDB is started, to seed the database run
 
 ```sh
 npm run seed
 ```
-
-to insert records into the database.
 
 During development, run the following commands in two separate terminals:
 
@@ -66,4 +70,15 @@ brew services start mongodb-community
 ```
 
 or follow the instructions on the website for starting MongoDB.
+
+
+## CRUD API
+
+The following URL's should be prefixed with '/api/products/:id'
+
+| Action | Request Method | URL |
+| Create a new Product Description | POST | '/api/products/:id' |
+| Get existing Product Description | GET | '/api/products/:id' |
+| Update existing Product Description | PUT | '/api/products/:id' |
+| Delete existing Product Description | DELETE | '/api/products/:id' |
 
