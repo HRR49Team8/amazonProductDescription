@@ -77,6 +77,7 @@ or follow the instructions on the website for starting MongoDB.
 The following URL's should be prefixed with '/api/products/:id'
 
 | Action | Request Method | URL |
+| ------------- | ------------- | --- |
 | Create a new Product Description | POST | '/api/products/:id' |
 | Get existing Product Description | GET | '/api/products/:id' |
 | Update existing Product Description | PUT | '/api/products/:id' |
