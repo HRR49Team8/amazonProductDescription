@@ -12,9 +12,10 @@ app.use('/', express.static('public'));
 // CRUD API REQS
 // CREATE
 app.post('/api/products/:id', (req, res) => {
-  var testPostObj = {
+
+  var postTestObj = {
     _id: 101,
-    name:  'Test for Post'
+    name: 'Test for Post',
     price: 101,
     prime: true,
     returnable: false,
@@ -25,32 +26,32 @@ app.post('/api/products/:id', (req, res) => {
     ingredient_info: 'More random things',
     about: 'It is fruitful research',
     ratings_avg: 4
-  }
+  };
 
-  var newProductDesc = new Product(postTestObj);
+  var newProduct = new Product(postTestObj);
 
-  newProduct.save(function (err, product) => {
+  newProduct.save( (err, product) => {
     if (err) {
       console.log(err);
-      res.send(404)}
-    else {
-      res.send('Successfully posted to the database')
+      res.send(404);
+    } else {
+      res.send('Successfully posted to the database');
     }
-  })
+  });
 
 });
 
 // READ
-  app.get('/api/products/:id', (req, res) => {
-    Product.findById(req.params.id, (err, product) => {
-      if (err) {
-        console.log('Error: ', err);
-        res.send(404);
-      } else {
-        res.send(product);
-      }
-    })
+app.get('/api/products/:id', (req, res) => {
+  Product.findById(req.params.id, (err, product) => {
+    if (err) {
+      console.log('Error: ', err);
+      res.send(404);
+    } else {
+      res.send(product);
+    }
   });
+});
 
 // UPDATE
 app.put('/api/products/:id', (req, res) => {
@@ -66,17 +67,28 @@ app.put('/api/products/:id', (req, res) => {
         about: 'It is fruitful research and implementation',
         ratings_avg: 3
       }
+    }, (err) => {
+      if (err) {
+        res.send(404);
+      } else {
+        res.send('product information has been updated');
+      }
     }
-  )
+  );
 });
 
 // DELETE
 app.delete('/api/products/:id', (req, res) => {
-  Product.deleteOne(
-    _id: 101
-  )
+  Product.deleteOne({ _id: 101 }, (err) => {
+    if (err) {
+      res.send(404);
+    } else {
+      res.send('Product information has been deleted')
+    }
+  }
+  );
 });
 
 app.listen(port, () => {
   console.log(`Listening at http://localhost:${port}`);
-})
+});
