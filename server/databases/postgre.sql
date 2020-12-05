@@ -12,7 +12,6 @@ CREATE TABLE IF NOT EXISTS products (
 CREATE TABLE IF NOT EXISTS specs (
   id SERIAL PRIMARY KEY,
   product_id INT NOT NULL,
-  -- stylesGroup_id INT,
   brand VARCHAR(50),
   rating NUMERIC(2,1),
   price MONEY NOT NULL,
@@ -28,17 +27,13 @@ FROM '/Users/alexandra/Hack-Reactor/SEI-hrr49/SDC/deb-service/server/csv/product
 DELIMITER ','
 CSV HEADER;
 
-COPY specs /*(...)*/
+COPY specs
 FROM '/Users/alexandra/Hack-Reactor/SEI-hrr49/SDC/deb-service/server/csv/specsDataCSV.csv'
 DELIMITER ','
 CSV HEADER;
 
-/*  To execute this file type the following into the command line:
+/*
+ *  To execute this file type the following into the command line:
  *    sudo -u alexandra psql postgres < server/databases/postgre.sql
  *  to create the database and the tables.
- *
- *  pv server/db/postgresSchema.sql | sudo -u postgres psql
- *
- *  To track progress of reviews copy:
- *  pv server/csv/reviews.csv | sudo -u postgres psql -d amazonreviews -c "copy reviews(product_id, user_id, overall_rating, review_date, headline, full_text, helpful, verified_purchase, product_photo) from stdin delimiter ',' CSV HEADER;"
  */

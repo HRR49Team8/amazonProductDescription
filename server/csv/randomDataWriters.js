@@ -1,4 +1,3 @@
-// require faker
 const faker = require('faker');
 
 // Random number generators
