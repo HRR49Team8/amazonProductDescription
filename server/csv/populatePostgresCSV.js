@@ -11,7 +11,7 @@ const deleteFileIfExists = (dest) => {
   if (fs.existsSync(dest)) {
     try {
       fs.unlinkSync(dest);
-      console.log('requests file deleted');
+      console.log('CSV file deleted');
     } catch (err) {
       console.error(err);
     }
@@ -22,18 +22,18 @@ const deleteFileIfExists = (dest) => {
 
 
 // // PRODUCTS TABLE CSV
-const productDest = path.join(__dirname, 'productsDataCSV.csv');
-deleteFileIfExists(productDest);
-const productsCSV = fs.createWriteStream(productDest);
+// const productDest = path.join(__dirname, 'productsDataCSV.csv');
+// deleteFileIfExists(productDest);
+// const productsCSV = fs.createWriteStream(productDest);
 
-var productHeader = 'id,product_name\n';
-var prodTot = 10000000;
+// var productHeader = 'id,product_name\n';
+// var prodTot = 10000000;
 
-console.time();
+// console.time();
 
-writeCSV(productsCSV, productHeader, makeProduct, prodTot, ()=>{ productsCSV.end(); });
+// writeCSV(productsCSV, productHeader, makeProduct, prodTot, ()=>{ productsCSV.end(); });
 
-console.timeEnd();
+// console.timeEnd();
 
 
 // SPECS TABLE CSV

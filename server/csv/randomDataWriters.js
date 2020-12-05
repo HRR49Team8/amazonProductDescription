@@ -43,7 +43,7 @@ const makeProductSpecs = (iteration) => {
     num1 = getRandomRatingNum(0, 6);
 
     if (num1 === 0) {
-      return null;
+      return '';
     } else if (num1 === 5) {
       return num1;
     } else {
@@ -53,14 +53,14 @@ const makeProductSpecs = (iteration) => {
 
   var id = iteration;
   var product_id = iteration;
-  var brand = faker.company.companyName();
+  var brand = `"${faker.company.companyName()}"`;
   var rating = makeRating();
   var price = faker.finance.amount();
   var prime = randomBool();
-  var size = sizes ? getRandomNum(6, 13) : null;
-  var dimensions = sizes ? null : makeDimensions();
+  var size = sizes ? getRandomNum(6, 13) : '';
+  var dimensions = sizes ? '' : makeDimensions();
   var color = faker.commerce.color();
-  var information = faker.lorem.paragraph(getRandomNum(3, 12));
+  var information = faker.lorem.paragraph(getRandomNum(3, 10));
 
   return `${id},${product_id},${brand},${rating},${price},${prime},${size},${dimensions},${color},${information}\n`;
 };

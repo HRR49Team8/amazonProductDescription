@@ -9,34 +9,24 @@ CREATE TABLE IF NOT EXISTS products (
   product_name VARCHAR(75) NOT NULL
 );
 
--- CREATE TABLE IF NOT EXISTS stylesGroups (
---   id SERIAL PRIMARY KEY,
---   prod1_id INT
--- );
-
 CREATE TABLE IF NOT EXISTS specs (
   id SERIAL PRIMARY KEY,
   product_id INT NOT NULL,
   -- stylesGroup_id INT,
-  brand VARCHAR(30),
-  rating NUMERIC(2,1) NOT NULL,
+  brand VARCHAR(50),
+  rating NUMERIC(2,1),
   price MONEY NOT NULL,
   prime BOOLEAN,
   size INT,
   dimensions VARCHAR(20),
   color VARCHAR(15),
-  information VARCHAR (750)
+  information VARCHAR (1000)
 );
 
-COPY products /*(product_name) idk if this is necessary*/
+COPY products
 FROM '/Users/alexandra/Hack-Reactor/SEI-hrr49/SDC/deb-service/server/csv/productsDataCSV.csv'
 DELIMITER ','
 CSV HEADER;
-
--- COPY styles /*(...)*/
--- FROM /* CSV file path */
--- DELIMITER ','
--- CSV HEADER;
 
 COPY specs /*(...)*/
 FROM '/Users/alexandra/Hack-Reactor/SEI-hrr49/SDC/deb-service/server/csv/specsDataCSV.csv'
