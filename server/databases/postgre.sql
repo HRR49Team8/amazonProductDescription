@@ -19,33 +19,32 @@ CREATE TABLE IF NOT EXISTS specs (
   product_id INT NOT NULL,
   -- stylesGroup_id INT,
   brand VARCHAR(30),
-  rating INT NOT NULL,
-  price INT NOT NULL,
+  rating NUMERIC(2,1) NOT NULL,
+  price MONEY NOT NULL,
   prime BOOLEAN,
   size INT,
   dimensions VARCHAR(20),
   color VARCHAR(15),
-  information VARCHAR (200)
+  information VARCHAR (750)
 );
 
 COPY products /*(product_name) idk if this is necessary*/
-FROM /* CSV file path */
--- "'/home/mikatpt/hackreactor/sdc/reviews/server/csv/products.csv'"
+FROM '/Users/alexandra/Hack-Reactor/SEI-hrr49/SDC/deb-service/server/csv/productsDataCSV.csv'
 DELIMITER ','
 CSV HEADER;
 
-COPY styles /*(...)*/
-FROM /* CSV file path */
-DELIMITER ','
-CSV HEADER;
+-- COPY styles /*(...)*/
+-- FROM /* CSV file path */
+-- DELIMITER ','
+-- CSV HEADER;
 
 COPY specs /*(...)*/
--- FROM /* CSV file path */
+FROM '/Users/alexandra/Hack-Reactor/SEI-hrr49/SDC/deb-service/server/csv/specsDataCSV.csv'
 DELIMITER ','
 CSV HEADER;
 
 /*  To execute this file type the following into the command line:
- *    sudo -u alexandra psql < server/databases/postgre.sql
+ *    sudo -u alexandra psql postgres < server/databases/postgre.sql
  *  to create the database and the tables.
  *
  *  pv server/db/postgresSchema.sql | sudo -u postgres psql

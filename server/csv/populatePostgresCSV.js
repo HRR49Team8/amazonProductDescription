@@ -21,20 +21,19 @@ const deleteFileIfExists = (dest) => {
 };
 
 
-// PRODUCTS TABLE CSV
-const productDest = path.join(__dirname, 'productsDataCSV.csv');
-deleteFileIfExists(productDest);
-const productsCSV = fs.createWriteStream(productDest);
+// // PRODUCTS TABLE CSV
+// const productDest = path.join(__dirname, 'productsDataCSV.csv');
+// deleteFileIfExists(productDest);
+// const productsCSV = fs.createWriteStream(productDest);
 
-var productHeader = 'id,product_name\n'; // rememner new line char
-// var product = makeProduct(); // takes param: iteration value
-var prodTot = 10000000; // change after testing
+// var productHeader = 'id,product_name\n';
+// var prodTot = 10000000;
 
-console.time();
+// console.time();
 
-writeCSV(productsCSV, productHeader, makeProduct, prodTot, ()=>{ productsCSV.end(); });
+// writeCSV(productsCSV, productHeader, makeProduct, prodTot, ()=>{ productsCSV.end(); });
 
-console.timeEnd();
+// console.timeEnd();
 
 
 // SPECS TABLE CSV

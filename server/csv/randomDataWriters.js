@@ -1,12 +1,18 @@
 // require faker
 const faker = require('faker');
 
-// Random number generator
+// Random number generators
 var getRandomNum = (min, max) => {
   min = Math.ceil(min);
   max = Math.floor(max);
   var random = Math.floor(Math.random() * (max - min) + min);
   return random ? random : null;
+};
+
+var getRandomRatingNum = (min, max) => {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min) + min);
 };
 
 // true or false generator
@@ -19,14 +25,14 @@ var randomBool = () => {
   }
 };
 
+
+
+// Data Generating Functions
 const makeProduct = (iteration) => {
   var id = iteration;
   var name = faker.commerce.productName();
   return `${id},${name}\n`;
 };
-
-// const makeRandomStyles = (iteration) => {
-// };
 
 const makeProductSpecs = (iteration) => {
   var sizes = randomBool();
@@ -34,20 +40,19 @@ const makeProductSpecs = (iteration) => {
     return getRandomNum(2, 9) + 'x' + getRandomNum(4, 13);
   };
   var makeRating = () => {
-    num1 = getRandomNum(0, 6);
+    num1 = getRandomRatingNum(0, 6);
 
     if (num1 === 0) {
       return null;
     } else if (num1 === 5) {
       return num1;
     } else {
-      return num1 + '.' + getRandomNum(0, 10);
+      return num1 + '.' + getRandomRatingNum(0, 10);
     }
   };
 
   var id = iteration;
   var product_id = iteration;
-  // var stylesGroup_id = '';
   var brand = faker.company.companyName();
   var rating = makeRating();
   var price = faker.finance.amount();
