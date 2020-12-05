@@ -19,7 +19,8 @@
     "build": "webpack -d --watch",
     "seed": "node server/seeds.js",
     "test": "jest",
-    "production": "webpack --config webpack.config.js && node server/app.js"
+    "production": "webpack --config webpack.config.js && node server/app.js",
+    "populate:pg": "node server/csv/populatePostgresCSV.js"
   },
   "repository": {
     "type": "git",
@@ -32,8 +33,10 @@
     "axios": "^0.21.0",
     "babel-loader": "^8.2.1",
     "express": "^4.17.1",
+    "fs": "0.0.1-security",
     "mongodb": "^3.6.3",
     "mongoose": "^5.10.13",
+    "path": "^0.12.7",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "styled-components": "^5.2.1",

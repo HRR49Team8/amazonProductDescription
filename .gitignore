@@ -27,3 +27,6 @@ bundle.js
 *.png
 
 *.pem
+
+# CSVs
+*.csv
