@@ -10,12 +10,12 @@ USE productdescription;
 
 CREATE TABLE IF NOT EXISTS products (
   id INT PRIMARY KEY,
-  product_name VARCHAR ,
+  product_name VARCHAR
 );
 
 CREATE TABLE IF NOT EXISTS styles (
   id INT PRIMARY KEY,
-  prod1_id INT,
+  prod1_id INT
 );
 
 CREATE TABLE IF NOT EXISTS specs (
