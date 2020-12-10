@@ -34,7 +34,7 @@ const makeProducts = () => {
         console.log('All documents were created!')
         mongoose.disconnect();
       }
-    })
+    });
   }
 };
 makeProducts();

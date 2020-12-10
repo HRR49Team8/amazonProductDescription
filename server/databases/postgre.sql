@@ -6,12 +6,7 @@ CREATE DATABASE productdescription;
 
 CREATE TABLE IF NOT EXISTS products (
   id SERIAL PRIMARY KEY,
-  product_name VARCHAR(75) NOT NULL
-);
-
-CREATE TABLE IF NOT EXISTS specs (
-  id SERIAL PRIMARY KEY,
-  product_id INT NOT NULL,
+  product_name VARCHAR(75) NOT NULL,
   brand VARCHAR(50),
   rating NUMERIC(2,1),
   price MONEY NOT NULL,
@@ -22,15 +17,15 @@ CREATE TABLE IF NOT EXISTS specs (
   information VARCHAR (1000)
 );
 
-COPY products
-FROM '/Users/alexandra/Hack-Reactor/SEI-hrr49/SDC/deb-service/server/csv/productsDataCSV.csv'
+COPY products (product_name, brand, rating, price, prime, size, dimensions, color, information)
+FROM '/Users/alexandra/Hack-Reactor/SEI-hrr49/SDC/deb-service/server/csv/New_PG_productsDataCSV.csv'
 DELIMITER ','
 CSV HEADER;
 
-COPY specs
-FROM '/Users/alexandra/Hack-Reactor/SEI-hrr49/SDC/deb-service/server/csv/specsDataCSV.csv'
-DELIMITER ','
-CSV HEADER;
+-- COPY specs
+-- FROM '/Users/alexandra/Hack-Reactor/SEI-hrr49/SDC/deb-service/server/csv/specsDataCSV.csv'
+-- DELIMITER ','
+-- CSV HEADER;
 
 /*
  *  To execute this file type the following into the command line:
