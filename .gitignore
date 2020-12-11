@@ -30,3 +30,7 @@ bundle.js
 
 # CSVs
 *.csv
+
+# Testing
+artillery.yaml
+newRelic.js

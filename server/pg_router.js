@@ -20,8 +20,14 @@ const findData = (id, cb) => {
       console.log(err);
       cb(err);
     } else {
-      console.log(res.rows[0]);
-      cb(res.rows[0]);
+      pool.query(`SELECT * FROM productStyles WHERE primarystyle_id = ${id}`, (err, res2) => {
+        if (err) {
+          console.log(err);
+          cb(err);
+        } else {
+          cb(['RES.rows[0]:', res.rows[0], '\nRes2:', res2.rows]);
+        }
+      });
     }
   });
 };

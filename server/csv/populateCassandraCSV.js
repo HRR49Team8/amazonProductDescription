@@ -1,6 +1,6 @@
 const path = require('path');
 const fs = require('fs');
-const { writeCSV } = require('./writeCSV.js');
+const { writeCSV } = require('./CSVwriters.js');
 const { makeProduct, makeProductSpecs } = require('./randomDataWriters.js');
 
 

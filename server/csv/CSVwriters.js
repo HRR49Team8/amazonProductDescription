@@ -60,4 +60,43 @@ const writeCSV = (csvfile, header, productFunc, amount, end) => {
 
 };
 
-module.exports = { writeCSV };
+const writeSecondaryCSV = (csvfile, header, productFunc, amount, end) => {
+  console.log(`trying to write ${amount} rows`);
+  let i = amount;
+  let x = 0;
+
+  csvfile.write(header, 'utf8');
+
+  const write = () => {
+    let ok = true;
+    do {
+      i--;
+      if (i === 0) {
+        if (((i + 1) % 4) === 0) { /// creates a new primProductID after 4 rows
+          x++;
+        }
+        console.log('writing last row');
+        // Last time!
+        csvfile.write(productFunc(x), 'utf8', end);
+      } else {
+        if ((i + 1) % 4 === 0) { /// creates a new primProductID after 4 rows
+          x++;
+        }
+        if (i % 1000000 === 0) {
+          console.log('a milli');
+        }
+        // See if we should continue, or wait.
+        // Don't pass the callback, because we're not done yet.
+        ok = csvfile.write(productFunc(x), 'utf8');
+      }
+    } while (i > 0 && ok);
+    if (i > 0) {
+      // Had to stop early!
+      // Write some more once it drains.
+      csvfile.once('drain', write);
+    }
+  };
+  write();
+};
+
+module.exports = { writeCSV, writeSecondaryCSV };

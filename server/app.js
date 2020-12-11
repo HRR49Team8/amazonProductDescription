@@ -1,6 +1,8 @@
+require('newrelic');
 const express = require('express');
 const app = express();
 const port = 3002;
+
 
 // MONGO
 const Product = require('../server/database');

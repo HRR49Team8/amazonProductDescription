@@ -22,10 +22,6 @@ FROM '/Users/alexandra/Hack-Reactor/SEI-hrr49/SDC/deb-service/server/csv/New_PG_
 DELIMITER ','
 CSV HEADER;
 
--- COPY specs
--- FROM '/Users/alexandra/Hack-Reactor/SEI-hrr49/SDC/deb-service/server/csv/specsDataCSV.csv'
--- DELIMITER ','
--- CSV HEADER;
 
 /*
  *  To execute this file type the following into the command line:

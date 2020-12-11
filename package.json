@@ -20,7 +20,8 @@
     "seed": "node server/seeds.js",
     "test": "jest",
     "production": "webpack --config webpack.config.js && node server/app.js",
-    "populate:pg": "node server/csv/populatePostgresCSV.js",
+    "populate:pg": "node server/csv/populatePGProductsCSV.js",
+    "populate:pg2": "node server/csv/populatePGProductStylesCSV.js",
     "populate:C": "node server/csv/populatePostgresCSV.js"
   },
   "repository": {
@@ -31,6 +32,7 @@
     "@babel/core": "^7.12.3",
     "@babel/preset-env": "^7.12.1",
     "@babel/preset-react": "^7.12.5",
+    "artillery": "^1.6.1",
     "axios": "^0.21.0",
     "babel-loader": "^8.2.1",
     "express": "^4.17.1",
@@ -38,6 +40,7 @@
     "fs": "0.0.1-security",
     "mongodb": "^3.6.3",
     "mongoose": "^5.10.13",
+    "newrelic": "^7.0.2",
     "nodemon": "^2.0.6",
     "path": "^0.12.7",
     "pg": "^8.5.1",
