@@ -5,9 +5,9 @@ const port = 3002;
 
 
 // MONGO
-const Product = require('../server/database');
+// const Product = require('../server/database');
 // CASSANDRA
-const { ProductsC, findProductC } = require('../server/cassandra.js');
+// const { ProductsC, findProductC } = require('../server/cassandra.js');
 // POSTGRES
 const { writeData, findData, updateData, deleteData } = require('./pg_router.js');
 
@@ -18,13 +18,13 @@ app.use('/', express.static('public'));
 
 // =============== POSTGRES CRUD API REQS ====================
 app.post('/api/products/:id', (req, res) => {
-  console.log('Receiving post request');
-  console.log('request body:', req.body['product_name']);
+  // console.log('Receiving post request');
+  // console.log('request body:', req.body['product_name']);
 
   var inputs = [req.body['product_name'], req.body.brand, req.body.rating, req.body.price, req.body.prime, req.body.size, req.body.dimensions, req.body.color, req.body.information];
 
   writeData(inputs, (data) => {
-    console.log('write req made it back to the server');
+    // console.log('write req made it back to the server');
     res.send(data);
   });
 
@@ -32,10 +32,10 @@ app.post('/api/products/:id', (req, res) => {
 
 // READ
 app.get('/api/products/:id', (req, res) => {
-  console.log('Getting from Postgres');
+  // console.log('Getting from Postgres');
   var id = Number(req.params.id);
   findData(id, (data) => {
-    console.log('data made it server-side:', data);
+    // console.log('data made it server-side:', data);
     res.send(data);
   });
 });
