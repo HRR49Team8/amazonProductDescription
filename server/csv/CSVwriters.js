@@ -6,58 +6,32 @@
 // the command to end the writestream
 
 const writeCSV = (csvfile, header, productFunc, amount, end) => {
-  var i = 0;
 
-  var logChecker = {
-    '1000000': '=',
-    '2000000': '==',
-    '3000000': '===',
-    '4000000': '====',
-    '5000000': '=====',
-    '6000000': '======',
-    '7000000': '=======',
-    '8000000': '========',
-    '9000000': '=========',
-    '10000000': '==========',
-  };
+  var i = amount;
 
   csvfile.write(header, 'utf8');
-
-  while ( i < amount) {
-    i++;
-    if (logChecker[i]) {
-      console.log(logChecker[i]);
+  const write = () => {
+    let ok = true;
+    do {
+      i--;
+      if (i === 0) {
+        console.log('writing last row');
+        csvfile.write(productFunc(x), 'utf8', end);
+      } else {
+        if (i % 10000000 === 0) {
+          console.log('===');
+          ok = csvfile.write(productFunc(x), 'utf8');
+        }
+      }
+    } while (i > 0 && ok);
+    if (i > 0) {
+      csvfile.once('drain', write);
     }
-    csvfile.write(productFunc(i), 'utf8');
-  }
+  };
+  write();
 
   console.log(`succesfully populated with ${i} records`);
   end();
-
-  // function writeOneMillionTimes(writer, data, encoding, callback) {
-  //   let i = 1000000;
-  //   write();
-  //   function write() {
-  //     let ok = true;
-  //     do {
-  //       i--;
-  //       if (i === 0) {
-  //         // Last time!
-  //         writer.write(data, encoding, callback);
-  //       } else {
-  //         // See if we should continue, or wait.
-  //         // Don't pass the callback, because we're not done yet.
-  //         ok = writer.write(data, encoding);
-  //       }
-  //     } while (i > 0 && ok);
-  //     if (i > 0) {
-  //       // Had to stop early!
-  //       // Write some more once it drains.
-  //       writer.once('drain', write);
-  //     }
-  //   }
-  // }
-
 };
 
 const writeSecondaryCSV = (csvfile, header, productFunc, amount, end) => {
@@ -83,7 +57,7 @@ const writeSecondaryCSV = (csvfile, header, productFunc, amount, end) => {
           x++;
         }
         if (i % 1000000 === 0) {
-          console.log('a milli');
+          console.log('===');
         }
         // See if we should continue, or wait.
         // Don't pass the callback, because we're not done yet.
@@ -100,3 +74,29 @@ const writeSecondaryCSV = (csvfile, header, productFunc, amount, end) => {
 };
 
 module.exports = { writeCSV, writeSecondaryCSV };
+
+
+
+/*
+  //   let i = 1000000;
+  //   write();
+  //   function write() {
+  //     let ok = true;
+  //     do {
+  //       i--;
+  //       if (i === 0) {
+  //         // Last time!
+  //         writer.write(data, encoding, callback);
+  //       } else {
+  //         // See if we should continue, or wait.
+  //         // Don't pass the callback, because we're not done yet.
+  //         ok = writer.write(data, encoding);
+  //       }
+  //     } while (i > 0 && ok);
+  //     if (i > 0) {
+  //       // Had to stop early!
+  //       // Write some more once it drains.
+  //       writer.once('drain', write);
+  //     }
+  //   }
+*/
