@@ -1,3 +1,4 @@
+const redis = require('./databases/redis.js');
 const pool = require('./postgres.js').pool;
 
 // CREATE
@@ -15,21 +16,39 @@ const writeData = (data, cb) => {
 
 // READ
 const findData = (id, cb) => {
-  pool.query(`SELECT * FROM products WHERE id = ${id}`, (err, res) => {
-    if (err) {
-      console.log(err);
-      cb(err);
-    } else {
-      pool.query(`SELECT * FROM productStyles WHERE primarystyle_id = ${id}`, (err, res2) => {
-        if (err) {
-          console.log(err);
-          cb(err);
-        } else {
-          cb(['RES.rows[0]:', res.rows[0], '\nRes2:', res2.rows]);
-        }
-      });
-    }
-  });
+
+  var redisData = null;
+  // query redis here:
+  redis.getAsync(id)
+    .then( data => {
+      if (data === null) {
+
+        pool.query(`SELECT * FROM products WHERE id = ${id}`, (err, res) => {
+          if (err) {
+            console.log(err);
+            cb(err);
+          } else {
+            pool.query(`SELECT * FROM productStyles WHERE primarystyle_id = ${id}`, (err, res2) => {
+              if (err) {
+                console.log(err);
+                cb(err);
+              } else {
+                // send info to redis
+                redis.setAsync(id, JSON.stringify([res.rows[0], res2.rows]));
+
+                cb([res.rows[0], res2.rows]);
+              }
+            });
+          }
+        });
+
+      } else {
+        cb(data);
+      }
+    })
+    .catch( err => {
+      cd(err);
+    });
 };
 
 // UPDATE
