@@ -33,3 +33,5 @@ bundle.js
 
 # Testing
 artillery.yaml
+
+.env
