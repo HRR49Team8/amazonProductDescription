@@ -23,7 +23,9 @@ const deleteFileIfExists = (dest) => {
 const records = 10000000;
 
 // PRODUCTS TABLE CSV
-const productDest = path.join(__dirname, 'New_PG_productsDataCSV.csv');
+const productDest = path.join(__dirname, 'PG_productsCSV.csv');
+const testDest = path.join(__dirname, 'testProductsCSV.csv'); // for testing the csvs
+
 deleteFileIfExists(productDest);
 const productsCSV = fs.createWriteStream(productDest);
 
@@ -32,9 +34,9 @@ var prodTot = records;
 
 console.time();
 
-productsCSV.on('drain', () => {
-  writeCSV(productsCSV, productHeader, makeProduct, prodTot, () => { productsCSV.end(); });
-});
+// productsCSV.on('drain', () => {
+//   writeCSV(productsCSV, productHeader, makeProduct, prodTot, () => { productsCSV.end(); });
+// });
 writeCSV(productsCSV, productHeader, makeProduct, prodTot, () => { productsCSV.end(); });
 
 console.timeEnd();

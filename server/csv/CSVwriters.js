@@ -8,21 +8,29 @@
 const writeCSV = (csvfile, header, productFunc, amount, end) => {
 
   var i = amount;
+  var x = 0;
 
   csvfile.write(header, 'utf8');
   const write = () => {
     let ok = true;
     do {
+
       i--;
       if (i === 0) {
-        console.log('writing last row');
+        // console.log('writing last row', x);
         csvfile.write(productFunc(x), 'utf8', end);
+
       } else {
-        if (i % 10000000 === 0) {
+        if (i % 1000000 === 0) {
           console.log('===');
-          ok = csvfile.write(productFunc(x), 'utf8');
         }
+        // console.log('writing ', x);
+        // console.log(i, ' left to go');
+        ok = csvfile.write(productFunc(), 'utf8');
+        x++;
+
       }
+
     } while (i > 0 && ok);
     if (i > 0) {
       csvfile.once('drain', write);
@@ -30,8 +38,8 @@ const writeCSV = (csvfile, header, productFunc, amount, end) => {
   };
   write();
 
-  console.log(`succesfully populated with ${i} records`);
-  end();
+  // console.log(`succesfully populated with ${x} records`);
+  // end();
 };
 
 const writeSecondaryCSV = (csvfile, header, productFunc, amount, end) => {
